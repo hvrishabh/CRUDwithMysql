@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-const CreateStudent = () => {
+const UpdateStudent = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const { id } = useParams();
   const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
     axios
-      .post("http://localhost:5000/create", { name, email })
+      .put("http://localhost:5000/update/" + id, { name, email })
       .then((res) => {
         console.log(res);
         navigate("/");
@@ -34,7 +35,7 @@ const CreateStudent = () => {
     <div className="d-flex vh-100 bg-primary justify-content-center align-items-center">
       <div className="w-50 bg-white rounded p-3">
         <form onSubmit={handleSubmit}>
-          <h2>Add Student</h2>
+          <h2>Update Student</h2>
           <div className="mb-2">
             <label htmlFor="name">Name</label>
             <input
@@ -57,11 +58,11 @@ const CreateStudent = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <button className="btn btn-success">Submit</button>
+          <button className="btn btn-success">Update</button>
         </form>
       </div>
     </div>
   );
 };
 
-export default CreateStudent;
+export default UpdateStudent;

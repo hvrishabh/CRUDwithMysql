@@ -34,6 +34,14 @@ const Student = () => {
     test();
   }, []);
 
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete("http://localhost:5000/student/" + id);
+      window.location.reload();
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <div className="d-flex vh-100 bg-primary justify-content-center align-item-center">
       <div className="w-75 bg-white rounded">
@@ -58,8 +66,18 @@ const Student = () => {
                     <td>{data.Name}</td>
                     <td>{data.Email}</td>
                     <td>
-                      <button className="btn btn-primary">Update</button>
-                      <button className="btn btn-danger ms-2">Delete</button>
+                      <Link
+                        to={`/update/${data.ID}`}
+                        className="btn btn-primary"
+                      >
+                        Update
+                      </Link>
+                      <button
+                        className="btn btn-danger ms-2"
+                        onClick={(e) => handleDelete(data.ID)}
+                      >
+                        Delete
+                      </button>
                     </td>
                   </tr>
                 );

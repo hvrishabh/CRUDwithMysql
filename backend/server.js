@@ -46,6 +46,28 @@ app.post("/create", (req, res) => {
 //   });
 // });
 
+app.put("/update/:id", (req, res) => {
+  const sql = "UPDATE student set `Name` = ? ,`Email` = ? where ID = ?";
+  const values = [req.body.name, req.body.email];
+  const id = req.params.id;
+
+  // return res.json(req);
+  db.query(sql, [...values, id], (err, data) => {
+    if (err) return res.json("ERROR....");
+    return res.json(data);
+  });
+});
+
+app.delete("/student/:id", (req, res) => {
+  const sql = "DELETE FROM student WHERE ID = ?";
+  const id = req.params.id;
+
+  db.query(sql, [id], (err, data) => {
+    if (err) return res.json("ERROR....");
+    return res.json(data);
+  });
+});
+
 app.listen(5000, () => {
   console.log("Listening..");
 });
