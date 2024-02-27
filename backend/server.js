@@ -68,6 +68,16 @@ app.delete("/student/:id", (req, res) => {
   });
 });
 
+app.get("/student/:id", (req, res) => {
+  //   res.json("Hello from the backend");
+  const id = req.params.id;
+  const sql = "SELECT * FROM student WHERE ID = (?)";
+  db.query(sql, [id], (err, data) => {
+    if (err) return res.json("Error1");
+    return res.json(data);
+  });
+});
+
 app.listen(5000, () => {
   console.log("Listening..");
 });

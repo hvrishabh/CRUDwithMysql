@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { NavLink, Link } from "react-router-dom";
+import { MyContext } from "./MyContext";
 const Student = () => {
   const [student, setStudent] = useState();
   const [loading, setLoading] = useState(true);
+  const { name, setName, email, setEmail } = useContext(MyContext);
+
   useEffect(() => {
     // if (loading) return console.log("loading...");
     // axios
@@ -33,6 +36,24 @@ const Student = () => {
     }
     test();
   }, []);
+  /////////////////////////////////////////////
+
+  // function handleUpdate(id) {
+  //   axios
+  //     .get("http://localhost:5000/student/" + id)
+  //     // .then((res) => console.log(res));
+  //     .then((res) => {
+  //       console.log(res);
+  //       setName(res.data[0].Name);
+  //       setEmail(res.data[0].Email);
+  //     });
+  // }
+
+  // useEffect(() => {
+  //   handleUpdate();
+  // }, [name, email]);
+
+  //////////////////////////////////////////////////////////
 
   const handleDelete = async (id) => {
     try {
@@ -69,6 +90,7 @@ const Student = () => {
                       <Link
                         to={`/update/${data.ID}`}
                         className="btn btn-primary"
+                        // onClick={(e) => handleUpdate(data.ID)}
                       >
                         Update
                       </Link>

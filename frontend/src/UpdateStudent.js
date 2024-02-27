@@ -1,5 +1,6 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import axios from "axios";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { MyContext } from "./MyContext";
 
@@ -11,7 +12,24 @@ const UpdateStudent = () => {
 
   const { id } = useParams();
   const navigate = useNavigate();
-  console.log(name, email);
+
+  useEffect(() => {
+    function setValues() {
+      axios
+        .get("http://localhost:5000/student/" + id)
+        // .then((res) => console.log(res));
+        .then((res) => {
+          setName(res.data[0].Name);
+          setEmail(res.data[0].Email);
+        });
+    }
+    setValues();
+
+    return () => {
+      setName("");
+      setEmail("");
+    };
+  }, []);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -49,7 +67,7 @@ const UpdateStudent = () => {
               placeholder="Enter Name"
               className="form-control"
               name="name"
-              // defaultValue={name}
+              defaultValue={name}
               onChange={(e) => setName(e.target.value)}
             />
           </div>
@@ -60,7 +78,7 @@ const UpdateStudent = () => {
               placeholder="Enter Name"
               className="form-control"
               name="email"
-              // defaultValue={email}
+              defaultValue={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
