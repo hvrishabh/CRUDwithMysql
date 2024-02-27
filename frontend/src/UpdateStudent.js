@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import { MyContext } from "./MyContext";
 
 const UpdateStudent = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  // const [name, setName] = useState("");
+  // const [email, setEmail] = useState("");
+
+  const { name, setName, email, setEmail } = useContext(MyContext);
+
   const { id } = useParams();
   const navigate = useNavigate();
+  console.log(name, email);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -31,6 +36,7 @@ const UpdateStudent = () => {
   //       })
   //       .catch((err) => console.log(err));
   //   }
+
   return (
     <div className="d-flex vh-100 bg-primary justify-content-center align-items-center">
       <div className="w-50 bg-white rounded p-3">
@@ -43,7 +49,7 @@ const UpdateStudent = () => {
               placeholder="Enter Name"
               className="form-control"
               name="name"
-              //   value={name}
+              // defaultValue={name}
               onChange={(e) => setName(e.target.value)}
             />
           </div>
@@ -54,7 +60,7 @@ const UpdateStudent = () => {
               placeholder="Enter Name"
               className="form-control"
               name="email"
-              //   value={email}
+              // defaultValue={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>

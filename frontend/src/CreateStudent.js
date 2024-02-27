@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { MyContext } from "./MyContext";
 
 const CreateStudent = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  // const [name, setName] = useState("");
+  // const [email, setEmail] = useState("");
+
+  const { name, setName, email, setEmail } = useContext(MyContext);
+
   const navigate = useNavigate();
 
   function handleSubmit(e) {

@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
   //   res.json("Hello from the backend");
   const sql = "SELECT * FROM student";
   db.query(sql, (err, data) => {
-    if (err) return res.json("Error");
+    if (err) return res.json("Error1");
     return res.json(data);
   });
 });
