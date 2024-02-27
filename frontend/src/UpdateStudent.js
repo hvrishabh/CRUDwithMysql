@@ -36,7 +36,7 @@ const UpdateStudent = () => {
     axios
       .put("http://localhost:5000/update/" + id, { name, email })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         navigate("/");
       })
       .catch((err) => console.log(err));

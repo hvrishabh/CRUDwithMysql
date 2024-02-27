@@ -16,7 +16,7 @@ const CreateStudent = () => {
     axios
       .post("http://localhost:5000/create", { name, email })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         navigate("/");
       })
       .catch((err) => console.log(err));
